@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SignInVC.swift
 //  social_network
 //
 //  Created by Teodora Knezevic on 7/19/19.
@@ -13,6 +13,9 @@ import FBSDKCoreKit
 
 class SignInVC: UIViewController {
 
+    @IBOutlet weak var emailField: FancyField!
+    @IBOutlet weak var pwdField: FancyField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,12 +32,11 @@ class SignInVC: UIViewController {
                 print("TEODORA:User cancelled Facebook authentication")
             }else {
                 print("TEODORA:Successfully authenticated with Facebook")
+                
+                let CREDENTIAL = FacebookAuthProvider.credential(withAccessToken:FBSDKAccessToken.current().tokenString)
+                
+                firebaseAuth(CREDENTIAL)
             }
-            
-            let CREDENTIAL = FacebookAuthProvider.credential(withAccessToken:FBSDKAccessToken.current().tokenString)
-            
-            firebaseAuth(CREDENTIAL)
-            
         })
             
         func firebaseAuth(_ credential:AuthCredential){
@@ -47,10 +49,28 @@ class SignInVC: UIViewController {
                     print("TEODORA:Successfully authenticated with Firebase")
                 }
             })
-      
         }
+    }
+    
+    @IBAction func signInTapped(_ sender: Any) {
         
-        
+        if let email = emailField.text, let pwd = pwdField.text{
+            
+            Auth.auth().signIn(withEmail: email, password: pwd, completion:{(user,error) in
+                
+                if error == nil{
+                    print("Email user authenticated with Firebase")
+                }else {
+                    Auth.auth().createUser(withEmail: email, password: pwd, completion: {(user, error)in
+                        if error != nil{
+                            print("Unable to auth with Firebase using email")
+                        }else{
+                            print("Successfully auth with Firebase using email")
+                        }
+                    })
+                }
+            })
+        }
     }
     
 }
