@@ -30,6 +30,7 @@
 		E81A9CD922E281DF00FF55BB /* RoundBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
 		E81A9CDB22E2893A00FF55BB /* FancyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyField.swift; sourceTree = "<group>"; };
 		E81A9CDD22E28C0600FF55BB /* FancyBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
+		E82745A322E3C1DD00854B9D /* social_network.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = social_network.entitlements; sourceTree = "<group>"; };
 		E8814DCF22E1CF870091E686 /* social_network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social_network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8814DD222E1CF870091E686 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8814DD422E1CF870091E686 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		E8814DD122E1CF870091E686 /* social_network */ = {
 			isa = PBXGroup;
 			children = (
+				E82745A322E3C1DD00854B9D /* social_network.entitlements */,
 				E81A9CD622E27D1E00FF55BB /* Util */,
 				E81A9CD122E1D72000FF55BB /* Model */,
 				E81A9CD222E1D72900FF55BB /* View */,
@@ -172,6 +174,11 @@
 				TargetAttributes = {
 					E8814DCE22E1CF870091E686 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -424,6 +431,7 @@
 			baseConfigurationReference = D7E7F4D68F770A8040EFB69F /* Pods-social_network.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = social_network/social_network.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8S83KJ7G8M;
 				INFOPLIST_FILE = social_network/Info.plist;
@@ -443,6 +451,7 @@
 			baseConfigurationReference = D334D6C2D2AA42072ADCC3F9 /* Pods-social_network.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = social_network/social_network.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8S83KJ7G8M;
 				INFOPLIST_FILE = social_network/Info.plist;
