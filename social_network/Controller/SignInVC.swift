@@ -69,6 +69,7 @@ class SignInVC: UIViewController {
     func completeSignIn(id:String){
         let result = KeychainWrapper.standard.set(id, forKey: KEY_ID)
         print("Data saved to keychain: \(result)")
+        self.performSegue(withIdentifier: "goToFeed", sender: nil)
     }
         
         
@@ -83,7 +84,6 @@ class SignInVC: UIViewController {
                     print("Email user authenticated with Firebase")
                     if let user = user {
                         self.completeSignIn(id: user.user.providerID)
-                        //self.performSegue(withIdentifier: "goToFeed", sender: nil)
                     }
                 }else {
                     Auth.auth().createUser(withEmail: email, password: pwd, completion: {(user, error)in
@@ -93,7 +93,6 @@ class SignInVC: UIViewController {
                             print("Successfully auth with Firebase using email")
                             if let user = user{
                                 self.completeSignIn(id: user.user.providerID)
-                                //self.performSegue(withIdentifier: "goToFeed", sender: nil)
                             }
                         }
                     })
