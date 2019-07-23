@@ -59,7 +59,7 @@ class SignInVC: UIViewController {
             }else {
                 print("TEODORA:Successfully authenticated with Firebase")
                 if let user = user {
-                    self.completeSignIn(id:user.user.providerID)
+                    self.completeSignIn(id: user.user.uid)
                 }
             }
         })
@@ -83,7 +83,7 @@ class SignInVC: UIViewController {
                 if error == nil{
                     print("Email user authenticated with Firebase")
                     if let user = user {
-                        self.completeSignIn(id: user.user.providerID)
+                        self.completeSignIn(id: user.user.uid)
                     }
                 }else {
                     Auth.auth().createUser(withEmail: email, password: pwd, completion: {(user, error)in
@@ -92,7 +92,7 @@ class SignInVC: UIViewController {
                         }else{
                             print("Successfully auth with Firebase using email")
                             if let user = user{
-                                self.completeSignIn(id: user.user.providerID)
+                                self.completeSignIn(id: user.user.uid)
                             }
                         }
                     })
