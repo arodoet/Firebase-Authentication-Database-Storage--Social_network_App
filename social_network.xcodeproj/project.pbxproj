@@ -15,6 +15,7 @@
 		E82745A522E51E1400854B9D /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82745A422E51E1400854B9D /* FeedVC.swift */; };
 		E82745A722E61A3F00854B9D /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82745A622E61A3F00854B9D /* CircleView.swift */; };
 		E82745A922E6475700854B9D /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82745A822E6475700854B9D /* PostCell.swift */; };
+		E82745AF22E8745E00854B9D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82745AE22E8745E00854B9D /* DataService.swift */; };
 		E8814DD322E1CF870091E686 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8814DD222E1CF870091E686 /* AppDelegate.swift */; };
 		E8814DD522E1CF870091E686 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8814DD422E1CF870091E686 /* SignInVC.swift */; };
 		E8814DD822E1CF870091E686 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8814DD622E1CF870091E686 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		E82745A422E51E1400854B9D /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		E82745A622E61A3F00854B9D /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		E82745A822E6475700854B9D /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		E82745AE22E8745E00854B9D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		E8814DCF22E1CF870091E686 /* social_network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = social_network.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8814DD222E1CF870091E686 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8814DD422E1CF870091E686 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		E82745AD22E8743E00854B9D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E82745AE22E8745E00854B9D /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E8814DC622E1CF870091E686 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +144,7 @@
 		E8814DD122E1CF870091E686 /* social_network */ = {
 			isa = PBXGroup;
 			children = (
+				E82745AD22E8743E00854B9D /* Services */,
 				E82745A322E3C1DD00854B9D /* social_network.entitlements */,
 				E81A9CD622E27D1E00FF55BB /* Util */,
 				E81A9CD122E1D72000FF55BB /* Model */,
@@ -294,6 +305,7 @@
 				E8814DD522E1CF870091E686 /* SignInVC.swift in Sources */,
 				E81A9CDA22E281DF00FF55BB /* RoundBtn.swift in Sources */,
 				E82745A522E51E1400854B9D /* FeedVC.swift in Sources */,
+				E82745AF22E8745E00854B9D /* DataService.swift in Sources */,
 				E8814DD322E1CF870091E686 /* AppDelegate.swift in Sources */,
 				E81A9CD522E27C8700FF55BB /* FancyView.swift in Sources */,
 				E81A9CD822E27D3B00FF55BB /* Constants.swift in Sources */,

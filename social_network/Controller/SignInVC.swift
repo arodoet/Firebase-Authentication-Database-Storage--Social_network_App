@@ -59,14 +59,16 @@ class SignInVC: UIViewController {
             }else {
                 print("TEODORA:Successfully authenticated with Firebase")
                 if let user = user {
-                    self.completeSignIn(id:user.user.providerID)
+                    let userData = ["provider":credential.provider]
+                    self.completeSignIn(id:user.user.uid, userData: userData)
                 }
             }
         })
         
     }
     
-    func completeSignIn(id:String){
+    func completeSignIn(id:String, userData:[String:String]){
+        DataService.DS.createFirebaseDBUser(uid: id, userData: userData)
         let result = KeychainWrapper.standard.set(id, forKey: KEY_ID)
         print("Data saved to keychain: \(result)")
         self.performSegue(withIdentifier: "goToFeed", sender: nil)
@@ -83,7 +85,8 @@ class SignInVC: UIViewController {
                 if error == nil{
                     print("Email user authenticated with Firebase")
                     if let user = user {
-                        self.completeSignIn(id: user.user.providerID)
+                        let userData = ["provider":user.user.providerID]
+                        self.completeSignIn(id: user.user.uid,userData: userData)
                     }
                 }else {
                     Auth.auth().createUser(withEmail: email, password: pwd, completion: {(user, error)in
@@ -92,7 +95,8 @@ class SignInVC: UIViewController {
                         }else{
                             print("Successfully auth with Firebase using email")
                             if let user = user{
-                                self.completeSignIn(id: user.user.providerID)
+                                let userData = ["provider":user.user.providerID]
+                                self.completeSignIn(id: user.user.uid, userData: userData)
                             }
                         }
                     })
