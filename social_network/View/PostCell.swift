@@ -18,15 +18,19 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var caption: UITextView!
     @IBOutlet weak var likesLbl: UILabel!
     
+    var post:Post!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func configureCell(post:Post){
+        self.post = post
+        
+        caption.text = post.caption
+        likesLbl.text = "\(post.likes)"
     }
 
 }

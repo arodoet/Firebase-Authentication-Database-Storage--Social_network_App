@@ -22,6 +22,7 @@
 		E8814DDA22E1CF880091E686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8814DD922E1CF880091E686 /* Assets.xcassets */; };
 		E8814DDD22E1CF880091E686 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8814DDB22E1CF880091E686 /* LaunchScreen.storyboard */; };
 		E8814DE522E1D03A0091E686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8814DE422E1D03A0091E686 /* GoogleService-Info.plist */; };
+		E8CC2F3222E8E83800070754 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CC2F3122E8E83800070754 /* Post.swift */; };
 		FC8FFDA1640B319E6EF455B6 /* Pods_social_network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E381BEC6B3899E036133431A /* Pods_social_network.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		E8814DDC22E1CF880091E686 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8814DDE22E1CF880091E686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8814DE422E1D03A0091E686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E8CC2F3122E8E83800070754 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		E81A9CD122E1D72000FF55BB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E8CC2F3122E8E83800070754 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				E82745A722E61A3F00854B9D /* CircleView.swift in Sources */,
 				E81A9CDC22E2893A00FF55BB /* FancyField.swift in Sources */,
 				E8814DD522E1CF870091E686 /* SignInVC.swift in Sources */,
+				E8CC2F3222E8E83800070754 /* Post.swift in Sources */,
 				E81A9CDA22E281DF00FF55BB /* RoundBtn.swift in Sources */,
 				E82745A522E51E1400854B9D /* FeedVC.swift in Sources */,
 				E82745AF22E8745E00854B9D /* DataService.swift in Sources */,
