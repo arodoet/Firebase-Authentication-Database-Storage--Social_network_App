@@ -20,6 +20,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        DataService.DS.ref_posts.observe(DataEventType.value) { (snapshot) in
+            print(snapshot.value)
+        }
 
     }
     
