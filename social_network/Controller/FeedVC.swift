@@ -10,10 +10,13 @@ import UIKit
 import SwiftKeychainWrapper
 import Firebase
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
+    @IBOutlet weak var imageAdd: CircleView!
     @IBOutlet weak var tableView: UITableView!
+    
+    var imagePicker:UIImagePickerController!
     
     var posts:[Post] = []
     
@@ -22,6 +25,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         
         DataService.DS.ref_posts.observe(DataEventType.value) { (snapshot) in
            
@@ -56,6 +63,18 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+            imageAdd.image = image
+        }
+        else{
+            print("Teodora: A valid image was not selected")
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
 
     @IBAction func signOutTapped(_ sender: Any) {       // moramo se odjaviti sa Firebase-a i skloniti user id iz keychain-a
     
@@ -66,6 +85,12 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         performSegue(withIdentifier: "goToSignIn", sender: nil)
     }
+    
+    
+    @IBAction func addImageTapped(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     
     /*
     // MARK: - Navigation
