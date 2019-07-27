@@ -14,7 +14,10 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIIma
     
     
     @IBOutlet weak var imageAdd: CircleView!
+    @IBOutlet weak var captionField: FancyField!
     @IBOutlet weak var tableView: UITableView!
+    
+    var imageSelected = false
     
     var imagePicker:UIImagePickerController!
     
@@ -84,6 +87,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIIma
 
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             imageAdd.image = image
+            imageSelected = true
         }
         else{
             print("Teodora: A valid image was not selected")
@@ -106,6 +110,42 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIIma
     
     @IBAction func addImageTapped(_ sender: Any) {
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func postBtnTapped(_ sender: Any) {
+        
+        guard let caption = captionField.text, caption != "" else{
+            print("Teodora: Caption must be entered")
+            return
+        }
+        guard let img = imageAdd.image, imageSelected == true else {
+            print("Teodora: An image must be selected")
+            return
+        }
+        
+        if let imgData = img.jpegData(compressionQuality: 0.2){
+            
+            let imgUid = NSUUID().uuidString
+            
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            DataService.DS.ref_post_images.child(imgUid).putData(imgData, metadata: metadata) { (metadata, error) in
+                if error != nil{
+                    print("Teodora: unable to upload image to firebase storage")
+                }else{
+                    print("Teodora: successfully uploaded image to firebase storage")
+                   
+                    if let delimicniDownloadURL = metadata?.path{
+                        let downloadURL = "gs://social-network-ab8ef.appspot.com/" + delimicniDownloadURL
+                        print("URL za download je \(downloadURL)")
+                        //let downloadURL = metadata?.downloadURL().absoluteString
+                    }
+                    
+                }
+            }
+        }
     }
     
     
