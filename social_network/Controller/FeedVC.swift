@@ -36,6 +36,8 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIIma
         imagePicker.allowsEditing = true
         
         DataService.DS.ref_posts.observe(DataEventType.value) { (snapshot) in
+            
+            self.posts = [] // da se ne bi gomilale iste slike svaki put kad se okine ovaj blok OBSERVE metode
            
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot]{
                 for snap in snapshot {
@@ -131,21 +133,45 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource,UIIma
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
+            // SALJEM SLIKU U STORAGE, UZIMAM URL SLIKE I NA KRAJU UBACUJEM CEO POST U BAZU
+            
             DataService.DS.ref_post_images.child(imgUid).putData(imgData, metadata: metadata) { (metadata, error) in
                 if error != nil{
                     print("Teodora: unable to upload image to firebase storage")
                 }else{
                     print("Teodora: successfully uploaded image to firebase storage")
+                    self.dajUrlSlike(id: imgUid)
                    
-                    if let delimicniDownloadURL = metadata?.path{
-                        let downloadURL = "gs://social-network-ab8ef.appspot.com/" + delimicniDownloadURL
-                        print("URL za download je \(downloadURL)")
-                        //let downloadURL = metadata?.downloadURL().absoluteString
-                    }
-                    
+//                    let downloadUrl = metadata?.downloadURL().absoluteString
+//                    if let url = downloadUrl{
+//                        print("URL za download je \(url)")
+//                    }
                 }
             }
         }
+    }
+    func dajUrlSlike(id:String){
+        DataService.DS.ref_post_images.child(id).downloadURL { (url, error) in
+            if error != nil {
+                print("Todora: Greska u dobijanju url slike")
+            }else{
+                if let downloadUrl = url{
+                    print("Teodora: URL za download slike je \(downloadUrl)")
+                    self.postToFirebase(imgUrl: downloadUrl.absoluteString)
+                }
+            }
+        }
+    }
+    func postToFirebase(imgUrl:String){
+        let post:[String:Any] = ["caption":captionField.text!,
+                                 "imageUrl": imgUrl,
+                                 "likes":0]
+        let firebasePost = DataService.DS.ref_posts.childByAutoId() // referenca
+        firebasePost.setValue(post)
+        
+        captionField.text = ""
+        imageSelected = false
+        imageAdd.image = UIImage(named: "add-image")
     }
     
     
