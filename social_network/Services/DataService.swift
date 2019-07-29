@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import SwiftKeychainWrapper
 
 let REF = Database.database().reference()
 let STORAGE_REF = Storage.storage().reference()
@@ -23,6 +24,15 @@ class DataService{
     private var _ref_users = REF.child("users")
     
     private var _ref_post_images = STORAGE_REF.child("post-pics")
+    
+    
+    //vraca mi trenutnog korisnika:
+    var ref_user_current:DatabaseReference{
+        // posto se id user-a u Keychain-u podudara sa id-jem usera u bazi to cemo iskoristiti
+        guard let uid = KeychainWrapper.standard.string(forKey: KEY_ID) else { return DatabaseReference()}
+        let user = DataService.DS._ref_users.child(uid)
+        return user
+    }
     
     var ref_base:DatabaseReference{
         return _ref_base

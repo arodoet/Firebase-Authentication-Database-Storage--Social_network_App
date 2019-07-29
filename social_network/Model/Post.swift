@@ -16,6 +16,9 @@ class Post {
     private var _likes:Int!
     private var _postKey:String!
     
+    var postRef:DatabaseReference
+
+    
     var imageUrl:String{
         return _imageUrl
     }
@@ -29,11 +32,13 @@ class Post {
         return _postKey
     }
     
-    init(imageUrl:String, caption:String, likes:Int) {
-        _imageUrl = imageUrl
-        _caption = caption
-        _likes = likes
-    }
+    
+    // sta ce nam ovaj init ? ? ?
+//    init(imageUrl:String, caption:String, likes:Int) {
+//        _imageUrl = imageUrl
+//        _caption = caption
+//        _likes = likes
+//    }
     
     init(postKey:String, postData:[String:Any]) {
         
@@ -48,6 +53,18 @@ class Post {
         if let likes = postData["likes"] as? Int{
             _likes = likes
         }
+        
+        postRef = DataService.DS.ref_posts.child(_postKey)
+    }
+    
+    
+    func adjustLikes(addLike:Bool){
+        if addLike {
+            _likes = _likes + 1
+        }else{
+            _likes = _likes - 1
+        }
+        postRef.child("likes").setValue(_likes)
     }
     
 }
